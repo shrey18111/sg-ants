@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import * as React from "react";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
 type Props = {
-    text: string;
-    handlePress: () => void;
+  text: string;
+  handlePress: () => void;
 };
 
 /**
@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     margin: 24,
     borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: 'green',
+    backgroundColor: "green",
   },
   text: {
     margin: 24,
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: 'white',
-  }
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "white",
+  },
 });

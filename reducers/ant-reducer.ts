@@ -1,48 +1,76 @@
-import { AntAction, InitializeAntStateAction, SetCalculatedAction, SetInProgressAction } from '../actions/ant-actions';
-import { setCalculated } from '../actions/game-actions'
-import { Ant, AntStatus, GameStatus } from '../components/commontypes';
+import {
+  AntAction,
+  InitializeAntStateAction,
+  SetCalculatedAction,
+  SetInProgressAction,
+} from "../actions/ant-actions";
+import { Ant, AntStatus, GameStatus } from "../components/commontypes";
 
-export type AntsState = { ants: { [key: string]: Ant }, completedAntsCount: number, numAnts: number, gameStatus: GameStatus };
+export type AntsState = {
+  ants: { [key: string]: Ant };
+  completedAntsCount: number;
+  numAnts: number;
+  gameStatus: GameStatus;
+};
 
-const initialState: AntsState = { ants: {}, completedAntsCount: 0, numAnts: 0, gameStatus: GameStatus.NotRun };
+const initialState: AntsState = {
+  ants: {},
+  completedAntsCount: 0,
+  numAnts: 0,
+  gameStatus: GameStatus.NotRun,
+};
 
-export const antsReducer = (state = initialState, action: AntAction)=>{
-  switch(action.type){
-    case 'INITIALIZE':
+export const antsReducer = (state = initialState, action: AntAction) => {
+  switch (action.type) {
+    case "INITIALIZE":
       let newState: { [key: string]: Ant } = {};
-      (action as InitializeAntStateAction).ants.forEach(ant => {
-        newState[ant.name] = { ...ant, status: AntStatus.NotRun, likelihood: 0 };
-      })
-      return { ...state, ants: newState, numAnts: (action as InitializeAntStateAction).ants.length };
-    case 'ANT_IN_PROGRESS':
+      (action as InitializeAntStateAction).ants.forEach((ant) => {
+        newState[ant.name] = {
+          ...ant,
+          status: AntStatus.NotRun,
+          likelihood: 0,
+        };
+      });
+      return {
+        ...state,
+        ants: newState,
+        numAnts: (action as InitializeAntStateAction).ants.length,
+      };
+    case "ANT_IN_PROGRESS":
       const currentAntName = (action as SetInProgressAction).antName;
       return {
         ...state,
         ants: {
           ...state.ants,
-          [currentAntName]: { ...state.ants[currentAntName], status: AntStatus.InProgress },
+          [currentAntName]: {
+            ...state.ants[currentAntName],
+            status: AntStatus.InProgress,
+          },
         },
       };
-    case 'ANT_CALCULATED':
+    case "ANT_CALCULATED":
       const currentAntN = (action as SetInProgressAction).antName;
       const newCompletedCount = state.completedAntsCount + 1;
-
-      if (newCompletedCount === state.numAnts) {
-        setCalculated();
-      }
 
       return {
         ...state,
         ants: {
           ...state.ants,
-          [currentAntN]: { ...state.ants[currentAntN], status: AntStatus.Calculated, likelihood: (action as SetCalculatedAction).likelihood },
+          [currentAntN]: {
+            ...state.ants[currentAntN],
+            status: AntStatus.Calculated,
+            likelihood: (action as SetCalculatedAction).likelihood,
+          },
         },
         completedAntsCount: newCompletedCount,
-        gameStatus: newCompletedCount === state.numAnts ? GameStatus.AllCalculated : GameStatus.InProgress,
+        gameStatus:
+          newCompletedCount === state.numAnts
+            ? GameStatus.AllCalculated
+            : GameStatus.InProgress,
       };
-    case 'GAME_IN_PROGRESS':
+    case "GAME_IN_PROGRESS":
       return { ...state, gameStatus: GameStatus.InProgress };
     default:
-      return state; 
+      return state;
   }
-}
+};

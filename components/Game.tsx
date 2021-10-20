@@ -1,14 +1,17 @@
-import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
+import * as React from "react";
+import { Text, View, StyleSheet } from "react-native";
+import { connect } from "react-redux";
 
-import Button from './Button';
-import AntTable from './AntTable';
-import { GameStatus, Ant } from './commontypes';
+import Button from "./Button";
+import AntTable from "./AntTable";
+import { GameStatus, Ant } from "./commontypes";
 
-import { setInProgress as setAntInProgress, setCalculated as setAntCalculated } from '../actions/ant-actions';
-import { setInProgress as setGameInProgress } from '../actions/game-actions';
-import { AppState } from '../store';
+import {
+  setInProgress as setAntInProgress,
+  setCalculated as setAntCalculated,
+} from "../actions/ant-actions";
+import { setInProgress as setGameInProgress } from "../actions/game-actions";
+import { AppState } from "../store";
 
 // Function provided for calculating liklihood
 function generateAntWinLikelihoodCalculator() {
@@ -37,14 +40,14 @@ type Props = {
 const Game = (props: Props) => {
   const handlePressStartGame = () => {
     props.setGameInProgress();
-    props.ants.forEach(ant => {
+    props.ants.forEach((ant) => {
       props.setAntInProgress(ant.name);
       const updateAntState = (likelihood: number) => {
-        props.setAntCalculated(ant.name, likelihood)
+        props.setAntCalculated(ant.name, likelihood);
       };
       generateAntWinLikelihoodCalculator()(updateAntState);
-    })
-  }
+    });
+  };
 
   return (
     <View>
@@ -55,11 +58,13 @@ const Game = (props: Props) => {
       <AntTable />
     </View>
   );
-}
+};
 
 const mapStateToProps = (state: AppState) => ({
   status: state.ants.gameStatus,
-  ants: Object.keys(state.ants.ants).map(antName => state.ants.ants[antName]).filter(ant => ant.name),
+  ants: Object.keys(state.ants.ants)
+    .map((antName) => state.ants.ants[antName])
+    .filter((ant) => ant.name),
 });
 
 const mapDispatchToProps = {
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
   title: {
     margin: 24,
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });

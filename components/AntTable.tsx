@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { Text } from 'react-native';
-import { DataTable } from 'react-native-paper';
-import { connect } from 'react-redux';
+import * as React from "react";
+import { Text } from "react-native";
+import { DataTable } from "react-native-paper";
+import { connect } from "react-redux";
 
-import { Ant, AntStatus } from './commontypes';
-import { AppState } from '../store';
+import { Ant, AntStatus } from "./commontypes";
+import { AppState } from "../store";
 
 type Props = {
-    ants: Ant[];
+  ants: Ant[];
 };
 
 /**
@@ -28,13 +28,15 @@ const AntTable = (props: Props) => {
         <DataTable.Title>Status</DataTable.Title>
         <DataTable.Title numeric>Likelihood</DataTable.Title>
       </DataTable.Header>
-      {props.ants.map(ant => formatAntRow(ant))}
+      {props.ants.map((ant) => formatAntRow(ant))}
     </DataTable>
   );
-}
+};
 
 const mapStateToProps = (state: AppState) => ({
-  ants: Object.keys(state.ants.ants).map(antName => state.ants.ants[antName]).filter(ant => ant.name),
+  ants: Object.keys(state.ants.ants)
+    .map((antName) => state.ants.ants[antName])
+    .filter((ant) => ant.name),
 });
 
 export default connect(mapStateToProps)(AntTable);
@@ -59,11 +61,11 @@ function formatAntRow(ant: Ant) {
  * Renders a colored text (based on AntStatus).
  */
 function formatColoredText(status: AntStatus) {
-  let color = 'grey';
+  let color = "grey";
   if (status === AntStatus.Calculated) {
-    color = 'green';
+    color = "green";
   } else if (status === AntStatus.InProgress) {
-    color = 'yellow';
+    color = "yellow";
   }
 
   return <Text style={{ backgroundColor: color }}>{status}</Text>;

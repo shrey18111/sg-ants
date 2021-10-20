@@ -1,11 +1,10 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
-import { Provider } from 'react-redux';
+import * as React from "react";
+import { View, StyleSheet } from "react-native";
+import Constants from "expo-constants";
+import { Provider } from "react-redux";
 
-import store from './store';
-import Main from './components/Main';
-
+import store from "./store";
+import Main from "./components/Main";
 
 export default function App() {
   return (
@@ -20,9 +19,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: "#ecf0f1",
     padding: 8,
   },
 });

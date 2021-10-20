@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { ActivityIndicator } from 'react-native';
-import { connect } from 'react-redux';
+import * as React from "react";
+import { ActivityIndicator } from "react-native";
+import { connect } from "react-redux";
 
-import Game from './Game';
-import Welcome from './Welcome';
-import { BasicAnt } from './commontypes';
+import Game from "./Game";
+import Welcome from "./Welcome";
+import { BasicAnt } from "./commontypes";
 
-import { initializeAntState } from '../actions/ant-actions';
+import { initializeAntState } from "../actions/ant-actions";
 
 type Props = {
   initializeAntState: (ants: BasicAnt[]) => void;
@@ -15,7 +15,7 @@ type Props = {
 // TODO: Wrap this in Redux
 async function callAntsAPI() {
   try {
-    const response = await fetch('https://sg-ants-server.herokuapp.com/ants');
+    const response = await fetch("https://sg-ants-server.herokuapp.com/ants");
     return await response.json();
   } catch (error) {
     // TODO: Prompt the user with Alert to re-try this step if failed.
@@ -44,8 +44,10 @@ const Main = (props: Props) => {
     <Welcome handleWelcomePress={handleWelcomePress} />
   ) : isLoading ? (
     <ActivityIndicator />
-  ) : <Game />;
-}
+  ) : (
+    <Game />
+  );
+};
 
 const mapDispatchToProps = { initializeAntState };
 

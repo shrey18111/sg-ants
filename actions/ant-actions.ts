@@ -1,12 +1,12 @@
-import { BasicAnt } from '../components/commontypes';
+import { BasicAnt } from "../components/commontypes";
 
 export type InitializeAntStateAction = {
   type: string;
   ants: BasicAnt[];
-}
+};
 
 export const initializeAntState = (ants: BasicAnt[]) => ({
-  type: 'INITIALIZE',
+  type: "INITIALIZE",
   ants,
 });
 
@@ -16,7 +16,7 @@ export type SetInProgressAction = {
 };
 
 export const setInProgress = (antName: string) => ({
-  type: 'ANT_IN_PROGRESS',
+  type: "ANT_IN_PROGRESS",
   antName,
 });
 
@@ -27,9 +27,12 @@ export type SetCalculatedAction = {
 };
 
 export const setCalculated = (antName: string, likelihood: number) => ({
-  type: 'ANT_CALCULATED',
+  type: "ANT_CALCULATED",
   antName,
   likelihood,
 });
 
-export type AntAction = InitializeAntStateAction | SetInProgressAction | SetCalculatedAction;
+export type AntAction =
+  | InitializeAntStateAction
+  | SetInProgressAction
+  | SetCalculatedAction;

@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import * as React from "react";
+import { Text, View, StyleSheet, Image } from "react-native";
 
-import Button from './Button';
+import Button from "./Button";
 
 type Props = {
-    handleWelcomePress: () => void;
+  handleWelcomePress: () => void;
 };
 
 /**
@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
   title: {
     margin: 24,
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
   subtitle: {
     margin: 24,
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });

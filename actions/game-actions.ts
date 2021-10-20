@@ -3,7 +3,7 @@ export type SetInProgressAction = {
 };
 
 export const setInProgress = () => ({
-  type: 'GAME_IN_PROGRESS',
+  type: "GAME_IN_PROGRESS",
 });
 
 export type GameAction = SetInProgressAction;
