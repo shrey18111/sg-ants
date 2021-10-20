@@ -4,6 +4,7 @@ import {
   SetCalculatedAction,
   SetInProgressAction,
 } from "../actions/ant-actions";
+import { GameAction } from "../actions/game-actions";
 import { Ant, AntStatus, GameStatus } from "../components/commontypes";
 
 export type AntsState = {
@@ -20,7 +21,14 @@ const initialState: AntsState = {
   gameStatus: GameStatus.NotRun,
 };
 
-export const antsReducer = (state = initialState, action: AntAction) => {
+/**
+ * Reducer for ants & game actions.
+ * TODO: Fix the type action param so we don't cast types.
+ */
+export const antsReducer = (
+  state = initialState,
+  action: AntAction | GameAction
+) => {
   switch (action.type) {
     case "INITIALIZE":
       let newState: { [key: string]: Ant } = {};
